@@ -1,0 +1,212 @@
+from __future__ import annotations
+
+from .models import Rule
+
+# The rules below are intentionally curated rather than purely prefix-based.
+# HGNC supplies current gene symbols and basic gene metadata; this file supplies
+# the biological Phase I/II/III mapping. Use tier="core" for review-paper sized
+# lists and tier="extended" for broader discovery-oriented lists.
+
+RULES: tuple[Rule, ...] = (
+    # Phase I: functionalization and redox/hydrolysis enzymes
+    Rule(
+        phase="Phase I",
+        family="Cytochrome P450 monooxygenases, ADME/carcinogen core",
+        role="oxidation; procarcinogen activation and xenobiotic clearance",
+        tier="core",
+        regexes=(r"^CYP(1A1|1A2|1B1|2A6|2A13|2B6|2C8|2C9|2C19|2D6|2E1|3A4|3A5|4F2)$",),
+        references=("HGNC", "XMETDB", "BRENDA", "CLINPGX", "PHARMVAR", "FDA_DDI"),
+        note="Core CYPs emphasized in human carcinogen metabolism, ADME, or pharmacogenomics.",
+    ),
+    Rule(
+        phase="Phase I",
+        family="Cytochrome P450 monooxygenases, broad family",
+        role="oxidation; broad xenobiotic and endogenous substrate metabolism",
+        tier="extended",
+        prefixes=("CYP",),
+        references=("HGNC", "XMETDB", "BRENDA", "CLINPGX", "PHARMVAR"),
+        note="Extended mode includes all approved human CYP symbols retrieved from HGNC.",
+    ),
+    Rule(
+        phase="Phase I",
+        family="Flavin-containing monooxygenases",
+        role="heteroatom oxidation; often detoxication-biased Phase I metabolism",
+        tier="core",
+        prefixes=("FMO",),
+        references=("HGNC", "XMETDB", "BRENDA"),
+    ),
+    Rule(
+        phase="Phase I",
+        family="Aldo-keto reductases",
+        role="carbonyl reduction; PAH dihydrodiol oxidation to redox-active quinones",
+        tier="core",
+        prefixes=("AKR",),
+        references=("HGNC", "XMETDB", "BRENDA"),
+    ),
+    Rule(
+        phase="Phase I",
+        family="Alcohol dehydrogenases",
+        role="alcohol oxidation; ethanol to acetaldehyde pathway",
+        tier="core",
+        prefixes=("ADH",),
+        references=("HGNC", "BRENDA", "CLINPGX"),
+    ),
+    Rule(
+        phase="Phase I",
+        family="Aldehyde dehydrogenases",
+        role="aldehyde oxidation; acetaldehyde clearance and reactive aldehyde detoxication",
+        tier="core",
+        prefixes=("ALDH",),
+        references=("HGNC", "BRENDA", "CLINPGX"),
+    ),
+    Rule(
+        phase="Phase I",
+        family="Carboxylesterases and ester hydrolases",
+        role="ester/amide hydrolysis; prodrug activation and xenobiotic clearance",
+        tier="core",
+        prefixes=("CES",),
+        symbols=("AADAC",),
+        references=("HGNC", "XMETDB", "BRENDA", "CLINPGX"),
+    ),
+    Rule(
+        phase="Phase I",
+        family="Epoxide hydrolases",
+        role="epoxide hydrolysis; detoxication of simple epoxides and PAH dihydrodiol formation",
+        tier="core",
+        symbols=("EPHX1", "EPHX2"),
+        references=("HGNC", "XMETDB", "BRENDA", "CLINPGX"),
+    ),
+    Rule(
+        phase="Phase I",
+        family="Molybdo-flavoenzymes",
+        role="oxidation and nitroreduction under low-oxygen conditions",
+        tier="core",
+        symbols=("XDH", "AOX1"),
+        references=("HGNC", "XMETDB", "BRENDA"),
+    ),
+    Rule(
+        phase="Phase I",
+        family="Monoamine oxidases",
+        role="oxidative deamination of xenobiotic and endogenous amines",
+        tier="core",
+        symbols=("MAOA", "MAOB"),
+        references=("HGNC", "XMETDB", "BRENDA"),
+    ),
+    Rule(
+        phase="Phase I",
+        family="Inflammation-linked oxidases and peroxidases",
+        role="peroxidase/co-oxidation routes for local carcinogen activation",
+        tier="core",
+        symbols=("MPO", "PTGS1", "PTGS2"),
+        references=("HGNC", "XMETDB", "BRENDA"),
+    ),
+    Rule(
+        phase="Phase I",
+        family="CYP electron-transfer modifiers",
+        role="electron transfer; modifies microsomal CYP catalytic activity",
+        tier="core",
+        symbols=("POR", "CYB5A", "CYB5B", "CYB5R3"),
+        references=("HGNC", "BRENDA", "CLINPGX", "PHARMVAR"),
+    ),
+
+    # Phase II: conjugation and electrophile-scavenging enzymes
+    Rule(
+        phase="Phase II",
+        family="UDP-glucuronosyltransferases",
+        role="glucuronidation; conjugation and excretion of hydroxyl, carboxyl, amine, and thiol substrates",
+        tier="core",
+        regexes=(r"^UGT[12][A-Z0-9]+$",),
+        references=("HGNC", "XMETDB", "BRENDA", "CLINPGX"),
+    ),
+    Rule(
+        phase="Phase II",
+        family="Sulfotransferases",
+        role="sulfation; detoxication or formation of unstable sulfate leaving groups",
+        tier="core",
+        prefixes=("SULT",),
+        references=("HGNC", "XMETDB", "BRENDA", "CLINPGX"),
+    ),
+    Rule(
+        phase="Phase II",
+        family="Glutathione transferases",
+        role="glutathione conjugation; electrophile scavenging and oxidative-stress defense",
+        tier="core",
+        regexes=(r"^(GSTA|GSTM|GSTP|GSTT|GSTZ|GSTO|GSTK)\w+", r"^MGST\d+$"),
+        references=("HGNC", "XMETDB", "BRENDA", "CLINPGX"),
+    ),
+    Rule(
+        phase="Phase II",
+        family="Arylamine N-acetyltransferases",
+        role="N-acetylation and O-acetylation of aromatic amines/hydrazines",
+        tier="core",
+        symbols=("NAT1", "NAT2"),
+        references=("HGNC", "XMETDB", "BRENDA", "CLINPGX"),
+    ),
+    Rule(
+        phase="Phase II",
+        family="Amino acid conjugation enzymes",
+        role="acyl-CoA amino acid N-acyl conjugation, especially glycine and bile acid conjugation",
+        tier="core",
+        symbols=("GLYAT", "GLYATL1", "GLYATL2", "GLYATL3", "BAAT"),
+        references=("HGNC", "XMETDB", "BRENDA"),
+    ),
+    Rule(
+        phase="Phase II",
+        family="Methyltransferases relevant to xenobiotic/endobiotic metabolism",
+        role="methyl conjugation of catechols, thiols, arsenicals, and related substrates",
+        tier="core",
+        symbols=("COMT", "TPMT", "NNMT", "HNMT", "AS3MT", "INMT", "GAMT"),
+        references=("HGNC", "BRENDA", "CLINPGX"),
+    ),
+    Rule(
+        phase="Phase II",
+        family="Quinone oxidoreductases",
+        role="two-electron quinone reduction; avoids semiquinone redox cycling",
+        tier="core",
+        symbols=("NQO1", "NQO2"),
+        references=("HGNC", "XMETDB", "BRENDA", "CLINPGX"),
+    ),
+
+    # Phase III: efflux and uptake transporters
+    Rule(
+        phase="Phase III",
+        family="ABC efflux transporters, ADME/cancer core",
+        role="ATP-dependent efflux of xenobiotics, metabolites, and anticancer drugs",
+        tier="core",
+        symbols=(
+            "ABCB1", "ABCB4", "ABCB11", "ABCC1", "ABCC2", "ABCC3", "ABCC4",
+            "ABCC5", "ABCC6", "ABCC10", "ABCG2",
+        ),
+        references=("HGNC", "TCDB", "FDA_DDI", "ISTRANSBASE", "CLINPGX", "PHARMVAR"),
+    ),
+    Rule(
+        phase="Phase III",
+        family="ABC transporters, broad family",
+        role="ATP-dependent transport across membranes",
+        tier="extended",
+        prefixes=("ABCA", "ABCB", "ABCC", "ABCD", "ABCG"),
+        references=("HGNC", "TCDB", "ISTRANSBASE"),
+    ),
+    Rule(
+        phase="Phase III",
+        family="SLC/SLCO uptake and bidirectional ADME transporters, core",
+        role="uptake, exchange, or facilitated transport of drugs, metabolites, bile acids, and organic ions",
+        tier="core",
+        symbols=(
+            "SLCO1B1", "SLCO1B3", "SLCO2B1", "SLCO1A2", "SLC22A1", "SLC22A2",
+            "SLC22A3", "SLC22A4", "SLC22A5", "SLC22A6", "SLC22A7", "SLC22A8",
+            "SLC22A11", "SLC22A12", "SLC22A24", "SLC47A1", "SLC47A2", "SLC15A1",
+            "SLC15A2", "SLC10A1", "SLC10A2", "SLC51A", "SLC51B", "SLC29A1",
+            "SLC29A2", "SLC31A1", "SLC31A2",
+        ),
+        references=("HGNC", "TCDB", "FDA_DDI", "SLC_TABLES", "ISTRANSBASE", "CLINPGX", "PHARMVAR"),
+    ),
+    Rule(
+        phase="Phase III",
+        family="SLC/SLCO transporters, broad ADME families",
+        role="uptake, exchange, or facilitated transport across membranes",
+        tier="extended",
+        prefixes=("SLCO", "SLC10", "SLC15", "SLC22", "SLC29", "SLC31", "SLC47", "SLC51"),
+        references=("HGNC", "TCDB", "SLC_TABLES", "ISTRANSBASE"),
+    ),
+)

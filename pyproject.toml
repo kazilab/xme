@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "xme-phase-list"
+version = "0.1.0"
+description = "Download and build curated Phase I, Phase II, and Phase III xenobiotic metabolism gene lists with references."
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+authors = [
+  {name = "Kazi Julhash Uddin"}
+]
+keywords = ["ADME", "xenobiotic metabolism", "Phase I", "Phase II", "Phase III", "HGNC", "pharmacogenomics"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Topic :: Scientific/Engineering :: Bio-Informatics",
+]
+
+[project.urls]
+Homepage = "https://github.com/julhashkazi/xme-phase-list"
+
+[project.optional-dependencies]
+app = [
+  "pandas>=2.0",
+  "streamlit>=1.51",
+]
+dev = [
+  "pytest>=8",
+]
+
+[project.scripts]
+xme-phase-list = "xme_phases.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
