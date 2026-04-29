@@ -1,4 +1,17 @@
-# xme-phase-list
+# Xenobiotic-Metabolizing Enzymes (XME) Explorer
+
+<!-- PyPI version badge -->
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://xme.streamlit.app)
+<!--[![PyPI version](https://img.shields.io/pypi/v/ExposoGraph.svg)](https://pypi.org/project/ExposoGraph/)-->
+<!--[![Documentation Status](https://readthedocs.org/projects/ExposoGraph/badge/?version=latest)](https://ExposoGraph.readthedocs.io/en/latest/?badge=latest)-->
+<!--[![ResearchSquare](https://img.shields.io/badge/ResearchSquare-rs--9202489%2Fv1-00A0E0.svg)](https://www.researchsquare.com/article/rs-9202489/v1)-->
+<!--[![bioRxiv](https://img.shields.io/badge/bioRxiv-10.64898%2F2026.03.22.713456-b31b1b.svg)](https://doi.org/10.64898/2026.03.22.713456)-->
+<!-- PyPI version badge -->
+[![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![GitHub](https://img.shields.io/badge/GitHub-kazilab%2Fcarcinogen_harmonizer-181717?logo=github&logoColor=white)](https://github.com/kazilab/carcinogen_harmonizer)
+[![@KaziLab.se](https://img.shields.io/website?url=https://www.kazilab.se/)](https://www.kazilab.se/)
+<!-- PyPI version badge -->
 
 `xme-phase-list` builds a curated, reference-backed list of human xenobiotic-metabolizing enzymes and transporters grouped by:
 
